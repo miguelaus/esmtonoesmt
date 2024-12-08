@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foto Oculta</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #080808;
+    }
+
+    .container {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      margin-bottom: 20px;
+    }
+
+    .tile {
+      width: 100%;
+      height: 100%;
+      background-color: #333;
+      position: relative;
+    }
+
+    .tile img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 400%;
+      height: 400%;
+      object-fit: cover;
+      transform: translate(-100%, -100%);
+      display: none;
+    }
+
+    .tile.revealed {
+      background-color: transparent;
+    }
+
+    .tile.revealed img {
+      display: block;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 20px;
+    }
+    .neon-basico {
+   box-shadow: 0 0 7px 1px #40b8e7;
+   
+   /* Es un color rosa estilo Neón */
+    }
+    @keyframes neonefecto {
+    50% {
+        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+    }
+    }
+    .menu-item-84, .menu-item-85 {
+    animation: neonefecto 1s infinite;
+    }
+    @keyframes neonefecto {
+    50% {
+        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+    }
+    }
+    .menu-item-86, .menu-item-87 {
+    animation: neonefecto 1s infinite;
+    color: white;
+    background-color: #080808;
+    }
+
+
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      animation: pulse1
+    }
+
+    .yes-button {
+      background-color: #4CAF50;
+      color: white;
+      animation: neoefecto 1.3s infinite;
+    }
+
+    @keyframes pulse1 {
+      0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 10px #00ff00, 0 0 20px #000000, 0 0 30px #00ff00;
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+    @keyframes pulse2 {
+      0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 10px #ff4b59, 0 0 20px #000000, 0 0 30px #ff4b59;
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+
+    .no-button {
+      background-color: #F44336;
+      color: white;
+      animation: pulse 1.5s infinite;
+    }
+
+    #score {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    .neon-button {
+    color: #4eff4b; /* Text color */
+    background-color: #1a1a1a; /* Same as the background for a seamless look */
+    border: 2px solid #4bff51; /* Solid border with neon color */
+    border-radius: 10px; /* Slight rounding of corners */
+    padding: 15px 30px; /* Padding around the text */
+    font-size: 20px; /* Visible and impactful text size */
+    font-family: "Montserrat", sans-serif; /* Stylish font */
+    letter-spacing: 3px; /* Space between letters for better readability */
+    cursor: pointer; /* Changes cursor to a pointer on hover */
+    font-weight: bold; /* Bold text */
+    filter: drop-shadow(0 0 5px #06e450) drop-shadow(0 0 5px #60ff4b)
+        contrast(1.8) brightness(1.8); /* Adds a subtle glow effect and enhances the vibrancy */
+    transition: 0.5s; /* Smooth color change on hover */
+    animation: pulse1 1.5s infinite;
+   
+    }
+    .neon-button2 {
+    color: #ff4b59; /* Text color */
+    background-color: #1a1a1a; /* Same as the background for a seamless look */
+    border: 2px solid #ff4b59; /* Solid border with neon color */
+    border-radius: 10px; /* Slight rounding of corners */
+    padding: 15px 30px; /* Padding around the text */
+    font-size: 20px; /* Visible and impactful text size */
+    font-family: "Montserrat", sans-serif; /* Stylish font */
+    letter-spacing: 3px; /* Space between letters for better readability */
+    cursor: pointer; /* Changes cursor to a pointer on hover */
+    font-weight: bold; /* Bold text */
+    filter: drop-shadow(0 0 5px #ff4b59) drop-shadow(0 0 5px #ff4b59)
+        contrast(1.8) brightness(1.8); /* Adds a subtle glow effect and enhances the vibrancy */
+    transition: 0.5s; /* Smooth color change on hover */
+    animation: pulse2 1.5s infinite;
+    }
+    .neon-button3 {
+    color: #ecdedf; /* Text color */
+    background-color: #1a1a1a; /* Same as the background for a seamless look */
+    border: 2px solid #fbfbfb; /* Solid border with neon color */
+    border-radius: 10px; /* Slight rounding of corners */
+    padding: 15px 30px; /* Padding around the text */
+    font-size: 20px; /* Visible and impactful text size */
+    font-family: "Montserrat", sans-serif; /* Stylish font */
+    letter-spacing: 3px; /* Space between letters for better readability */
+    cursor: pointer; /* Changes cursor to a pointer on hover */
+    font-weight: bold; /* Bold text */
+    filter: drop-shadow(0 0 5px #fffdfd) drop-shadow(0 0 5px #fbfbfb)
+        contrast(1.8) brightness(1.8); /* Adds a subtle glow effect and enhances the vibrancy */
+    transition: 0.5s; /* Smooth color change on hover */
+    animation: pulse2 1.5s infinite;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+   
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .modal-content button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .play-again {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .quit {
+      background-color: #F44336;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="menu-item-84">¿Es Musicoterapéuta?</h1>
+  <h1 class="menu-item-84">¿O tal vez NO?</h1>
+  <div class="container neon-button3" id="container"></div>
+  <div class="button-container ">
+    <button class="neon-button" onclick="handleGuess(true)">Es musicoterapéuta</button>
+    <button class="neon-button2" onclick="handleGuess(false)">No es musicoterapéuta</button>
+  </div>
+  <div id="score">Puntuación: 0</div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2 id="final-score">Puntuación Final: 0</h2>
+      <button class="play-again" onclick="resetGame()">Volver a Jugar</button>
+      <button class="quit" onclick="closeModal()">Retirarse del Juego</button>
+    </div>
+  </div>
+
+  <script>
+    const images = [
+{ url: 'https://hips.hearstapps.com/hmg-prod/images/jennifer-aniston-elle-641336d552619.jpg?crop=1xw:0.8884665508253693xh;center,top&resize=1200:*', name: '1' },
+{ url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqQpc5bi-NlUkNrWiHMgCkJNSSqgN73XAKtA&s', name: '2' },
+{ url: 'https://cdn-8.motorsport.com/images/mgl/6xEkVd50/s800/franco-colapinto-williams-raci.jpg', name: '3' },
+{ url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU8t4Z6fOP1syXpm4yxk8WtOCX3Yw-NVvbBA&s', name: '4' },
+{ url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSidX6e6iqb7YFMKg4PTZmDhQu9JnBqEEN1Vg&s', name: '5' },
+{ url: 'https://piauihoje.com/uploads/imagens/sem-titulo9%7C1567726293.jpg', name: '6' }
+];
+
+    let currentIndex = 0;
+    let score = 0;
+
+    function createTiles(image) {
+      const container = document.getElementById('container');
+      container.innerHTML = '';
+
+      for (let row = 0; row < 4; row++) {
+        for (let col = 0; col < 4; col++) {
+          const tile = document.createElement('div');
+          tile.classList.add('tile');
+
+          const img = document.createElement('img');
+          img.src = image.url;
+          img.style.transform = `translate(-${col * 25}%, -${row * 25}%)`;
+
+          tile.appendChild(img);
+          container.appendChild(tile);
+        }
+      }
+
+      revealRandomTiles();
+    }
+
+    function revealRandomTiles() {
+      const tiles = document.querySelectorAll('.tile');
+      const start = Math.floor(Math.random() * (tiles.length - 10)); // Starting point
+      const direction = Math.random() < 0.90 ? 'horizontal' : 'vertical';
+      const revealCount = Math.floor(Math.random() * 6) + 7; // Between 2 and 5 tiles
+
+      for (let i = 0; i < revealCount; i++) {
+        const index = direction === 'horizontal' ? start + i : start + i * 20;
+        if (tiles[index]) tiles[index].classList.add('revealed');
+      }
+    }
+
+    function handleGuess(isTherapist) {
+      const currentImage = images[currentIndex];
+      const isEvenImage = parseInt(currentImage.name) % 2 === 0;
+
+      if (isTherapist && isEvenImage) {
+        score++;
+      }
+
+      document.getElementById('score').innerText = `Puntuación: ${score}`;
+      revealFullImage();
+
+      setTimeout(() => {
+        currentIndex++;
+        if (currentIndex < images.length) {
+          createTiles(images[currentIndex]);
+        } else {
+          showModal();
+        }
+      }, 1000);
+    }
+
+    function revealFullImage() {
+      const tiles = document.querySelectorAll('.tile');
+      tiles.forEach(tile => tile.classList.add('revealed'));
+    }
+
+    function showModal() {
+      const modal = document.getElementById('modal');
+      document.getElementById('final-score').innerText = `Puntuación Final: ${score}`;
+      modal.style.display = 'flex';
+    }
+
+    function resetGame() {
+      const modal = document.getElementById('modal');
+      modal.style.display = 'none';
+      currentIndex = 0;
+      score = 0;
+      document.getElementById('score').innerText = `Puntuación: 0`;
+      createTiles(images[currentIndex]);
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createTiles(images[currentIndex]);
+    });
+  </script>
+</body>
+</html>
+
+
